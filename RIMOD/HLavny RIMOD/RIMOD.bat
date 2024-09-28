@@ -179,10 +179,18 @@ echo POZOR: Nedavaj medzeri, ked pises mod, pred a za slovami davaj " " napr: "M
 echo.
 set /p M=Napis nazov modu: 
 echo.
+echo Ked ste urobili chybu v nazve modu staci ked napises: 1_omyl
+echo aby si mohol znovu zadat svoj mod nazov
 echo.
 set /p Autor=Napis svoju hernu prezivku/nickname: 
+if %Autor%==1_omyl goto RIMOD
 echo.
 echo.
+
+goto RIMODV
+:RIMODV
+cls
+
 echo Toto su vsetky kompatibilne verzie od najnovsich po najstarsie:
 echo 1.5, 1.4, 1.3, 1.2, [1.1, 1.0]^<--Tieto su od povodnej hry, tie ostatne su DLCs
 set /p vsetky_verzie=Ked das [1] Daju sa ti tam vsetky verzie. [2] Budes ich tam pridavat podla seba:  
@@ -202,9 +210,32 @@ set /p verzia6=Napis verziu pre svoj mod: & goto RIMOD1
 
 :RIMOD1
 cls
+echo POZOR: Nefunguju tu makkcene a dlzne i keby si pridal " " to nepojde
 echo.
-set /p POPIS=Napis popis svojho modu: 
-echo.
+set /p POPIS1=Napis popis svojho modu: 
+set /p POPIS0=Na dalsi riadok [1] alebo stacilo [2]: 
+if %POPIS0%==1 set /p POPIS2=2. riadok: 
+if %POPIS0%==2 goto RIMODM
+
+set /p POPIS0=Na dalsi riadok [1] alebo stacilo [2]: 
+if %POPIS0%==1 set /p POPIS3=3. riadok: 
+if %POPIS0%==2 goto RIMODM
+
+set /p POPIS0=Na dalsi riadok [1] alebo stacilo [2]: 
+if %POPIS0%==1 set /p POPIS4=4. riadok: 
+if %POPIS0%==2 goto RIMODM
+
+set /p POPIS0=Na dalsi riadok [1] alebo stacilo [2]: 
+if %POPIS0%==1 set /p POPIS5=5. riadok: 
+if %POPIS0%==2 goto RIMODM
+
+set /p POPIS0=Na dalsi riadok [1] alebo stacilo [2]: 
+if %POPIS0%==1 set /p POPIS6=6. riadok: 
+if %POPIS0%==2 goto RIMODM
+
+goto RIMOD1
+:RIMODM
+cls
 echo.
 echo 2. Kde chces aby mod bol vytvoreny
 echo POZOR: Premiestnovanie medzi hardiskami sa neda, len na tom hardisku kde je RIMOD, na inom hardisku to nejde,
@@ -245,7 +276,12 @@ type nul>> About.xml
 (
 echo    ^<packageId^>%Autor%.%M%^</packageId^>
 echo    ^<description^>
-echo.      %POPIS%
+echo.      %POPIS1%
+echo.      %POPIS2%
+echo.      %POPIS3%
+echo.      %POPIS4%
+echo.      %POPIS5%
+echo.      %POPIS6%
 echo    ^</description^>
 echo    ^<loadAfter^>
 echo        ^<li^>Ludeon.RimWorld^</li^>
@@ -265,7 +301,7 @@ echo POZOR: Ked zadavas lokaciu, poriadne sa pozri ci su tam
 echo        medzeri medzi slovami, ak ano tak daj " " napr: \"Velke Jazero"\
 echo.
 echo 1 Preskocit pridavania obrazka ist dalej
-echo 2 Naspat
+echo 2 Naspat (uplne)
 echo.
 echo Vyber si obrazok, ktory ma byt 640^*360
 set /p Preview=Zadaj lokaciu svojho obrazka: 
@@ -281,12 +317,14 @@ cd C:\Steam\steamapps\common\RimWorld\Mods\%M%
 
 echo 1 Pridat celu strukturu modu
 echo 2 Pridat strukturu modu podla seba
-echo.
+echo 3 Nic nepridavat
 echo.
 set /p nove=Zadaj hodnotu: 
 if %nove%==1 md Languages Patches Assemblies Sounds Miscellaneous & type nul> LoadFolders.xml & goto KONIEC
 if %nove%==2 goto PriDal2
+if %nove%==3 goto RIM
 
+goto PriDal
 :PriDal2
 cls
 cd C:\Steam\steamapps\common\RimWorld\Mods\%M%
@@ -381,7 +419,12 @@ type nul>> About.xml
 (
 echo    ^<packageId^>%Autor%.%M%^</packageId^>
 echo    ^<description^>
-echo.      %POPIS%
+echo.      %POPIS1%
+echo.      %POPIS2%
+echo.      %POPIS3%
+echo.      %POPIS4%
+echo.      %POPIS5%
+echo.      %POPIS6%
 echo    ^</description^>
 echo    ^<loadAfter^>
 echo        ^<li^>Ludeon.RimWorld^</li^>
@@ -406,7 +449,7 @@ echo.
 echo Vyber si obrazok, ktory ma byt 640^*360
 set /p Preview=Zadaj lokaciu svojho obrazka: 
 if %Preview%==1 goto PriDal3
-if %Preview%==2 goto RIM
+if %Preview%==2 goto RIM (uplne)
 set /p Preview=Zadaj lokaciu svojho obrazka: 
 
 cd %Preview% & move Preview.png %Z%\%M%\About
@@ -419,11 +462,12 @@ cd %Z%\%M%
 
 echo 1 Pridat celu strukturu modu
 echo 2 Pridat celu strukturu modu podla seba
-echo.
+echo 3 Nic nepridavat
 echo.
 set /p nove=Zadaj hodnotu: 
 if %nove%==1 md Languages Patches Assemblies Sounds Miscellaneous type nul> LoadFolders.xml & goto RIM
 if %nove%==2 goto PriDal4
+if %nove%==3 goto RIM
 
 :PriDal4
 cls

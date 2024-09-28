@@ -1,5 +1,7 @@
 @echo off
 cls
+
+
 :NACITAVANIE44
 
 
@@ -51,10 +53,10 @@ echo.
 echo.
 echo.
 echo.
-echo					R  
+echo 				R   
 echo 				R   	     	                
 echo 				R   	         	                  
-echo 				R                          
+echo 				R                           
 echo 				R   	                               
 echo 				R                               
 echo 				R           
@@ -70,7 +72,6 @@ echo.
 echo.
 echo.
 echo.
-
 
 sleep 0.005
 
@@ -1582,6 +1583,11 @@ echo.
 echo.
 echo.
 sleep 2
+
 cd HLavny RIMOD & start RIMOD.bat & exit
+
+
+
+
 
 
